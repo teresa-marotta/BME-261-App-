@@ -9,12 +9,14 @@ class Patient(models.Model):
 	info = models.TextField()
 	date_added = models.DateTimeField(default=timezone.now)
 	technician = models.ForeignKey(User, on_delete=models.CASCADE)
-	audio = models.FileField(upload_to='audio_files')
+	audio = models.FileField(upload_to='audio_files', null=True, verbose_name="")
 
 	def __str__ (self):
 		return self.title
 
-	#def get_absolute_url(self):
-		#return reverse('post-detail', kwargs={'pk': self.pk})
+	def get_absolute_url(self):
+		return reverse('patient-detail', kwargs={'pk': self.pk})
+
+
 
 

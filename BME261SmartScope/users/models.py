@@ -20,8 +20,12 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-class AudioFiles(models.Model): 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    audio = models.FileField(upload_to='audio_files')
 
-   
+class Mails(models.Model):
+    email = models.EmailField() 
+    subject = models.CharField(max_length=1000)
+    message = models.CharField(max_length=20000)
+    document = models.FileField(upload_to='documents', null=True, verbose_name="")
+    
+    def __str__(self):
+        return self.email  

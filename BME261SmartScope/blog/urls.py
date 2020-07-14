@@ -1,14 +1,18 @@
 from django.urls import path
-from .views import PatientListView, PatientDetailView, PatientCreateView, PatientUpdateView, PatientDeleteView, UserPatienttListView
+from .views import PatientListView, PatientDetailView, PatientUpdateView, PatientDeleteView, UserPatientListView, PatientCreate
 from . import views
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
-    path('', views.blog-home, name='blog-home'), 
-    #path('', PostListView.as_view(), name='blog-home'),
-    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
-    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('post/new/', PostCreateView.as_view(), name='post-create'),
-    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
-    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('', views.home, name='blog-home'),
+    path('patientlist/', PatientListView.as_view(), name='patient-list'),
+    path('user/<str:username>', UserPatientListView.as_view(), name='user-patients'),
+    path('patient/<int:pk>/', PatientDetailView.as_view(), name='patient-detail'),
+    path('patient/new/', PatientCreate, name='patient-create'),
+    path('patient/<int:pk>/update/', PatientUpdateView.as_view(), name='patient-update'),
+    path('patient/<int:pk>/delete/', PatientDeleteView.as_view(), name='patient-delete'),
     path('about/', views.about, name='blog-about'), 
 ]

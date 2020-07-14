@@ -1,37 +1,35 @@
 {% extends "blog/base.html" %}
 {% block content %}
-	{% for post in posts %}
-	<article class="media content-section">
-	  <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-	  <div class="media-body">
-	    <div class="article-metadata">
-	      <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-	      <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-	    </div>
-	    <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-	    <p class="article-content">{{ post.content }}</p>
-	  </div>
-	</article>
-	{% endfor %}
-	{% if is_paginated %}
+{% load static %}
+	<h1>Welcome to <em>Smart Scope</em>!</h1>
+	<h3>Let's get started on learning how to record a heart sound</h3>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/KMYzpJLOF1c" frameborder="0" allow="accelerometer;" allowfullscreen></iframe>
+	<!-- https://journals.rcni.com/nursing-standard/how-to-auscultate-for-heart-sounds-in-adults-ns.2017.e10965 -->
+	
 
-		{% if page_obj.has_previous %}
-			<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-			<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-		{% endif %}
+	<div class="card-deck">
+  		<div class="card">
+    		<img class="card-img-top" src="{% static 'home_pics/stethoscope.jpg' %}" alt="Card image cap">
+    		<div class="card-body">
+      			<h5 class="card-title">Stethoscope</h5>
+      			<p class="card-text">A stethoscope is used to auscultate for heart sounds. The diaphragm of the stethoscope is used to identify high-pitched sounds, while the bell is used to identify low-pitched sounds.</p>
+    		</div>
+  		</div>
+  		<div class="card">
+   			<img class="card-img-top" src="{% static 'home_pics/s1s2.jpg' %}" alt="Card image cap">
+    		<div class="card-body">
+      			<h5 class="card-title">Heart Sounds</h5>
+      			<p class="card-text">There are two normal heart sounds that should be elicited in auscultation: S1 (lub) and S2 (dub).</p>
+    		</div>
+  		</div>
+  		<div class="card">
+    		<img class="card-img-top" src="{% static 'home_pics/heartsounds.jpg' %}" alt="Card image cap">
+    		<div class="card-body">
+      			<h5 class="card-title">Where to Place Stethoscope</h5>
+      			<p class="card-text">The practitioner should listen over each of the four main heart valve areas: the aortic, pulmonary, tricuspid and mitral valve areas. They should also listen for any additional sounds such as clicks, and heart murmurs.</p>
+    		</div>
+  		</div>
+	</div>
 
-		{% for num in page_obj.paginator.page_range %}
-			{% if page_obj.number == num %}
-				<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-			{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-				<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-			{% endif %}
-		{% endfor %}
 
-		{% if page_obj.has_next %}
-			<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-			<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-		{% endif %}
-
-	{% endif %}
 {% endblock content %}
